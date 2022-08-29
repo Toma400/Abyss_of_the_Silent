@@ -1,6 +1,10 @@
 import pygame; pygame.init()
-import toml; sv = toml.load("settings.toml")
-svx = sv["screen_res_x"]; svy = sv["screen_res_y"]
+import objects, utils
+from utils import (
+    gpath,
+    svx,
+    svy
+)
 from pygame.locals import (
     K_UP,
     K_DOWN,
@@ -13,24 +17,23 @@ from pygame.locals import (
 
 # Set up the drawing window
 screen = pygame.display.set_mode([svx, svy])
+imbg = utils.spriteLoad("menu.png")
+imbt = utils.spriteLoad("start.png")
 
-# Run until the user asks to quit
 running = True
 while running:
 
     # Did the user click the window close button?
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+        if event.type == pygame.QUIT or event.type == KEYDOWN and event.key == K_ESCAPE:
             running = False
 
-    # Fill the background with white
-    screen.fill((255, 255, 255))
-
-    # Draw a solid blue circle in the center
-    pygame.draw.circle(screen, (0, 0, 255), (svx/2, svy/2), 75)
+    #utils.bgIterImage(screen=screen, image=imbg, qual=160)
+    utils.bgFullImage(screen=screen, imagepath="isle.jpg")
+    #screen.blit(imbt, (svx/3.5, svy/1.457))
 
     # Flip the display
     pygame.display.flip()
 
 # Done! Time to quit.
-pygame.quit()
+utils.exitRemover(); pygame.quit()
