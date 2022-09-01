@@ -38,12 +38,6 @@ def returnCell(pos_x, pos_y):
     svxc = svx / 100; svyc = svy / 100 #finds out cell size
     return pos_x * svxc, pos_y * svyc  #returns %posi into pixel posi
 
-#@DeprecationWarning
-def bgIterImageOld(screen, image, qual: int):
-    for x in range(svx // qual + 1):
-        for y in range(svx // qual + 1):
-            screen.blit(image, (x*qual, y*qual))
-
 #===================================================
 # SOUNDS
 #===================================================

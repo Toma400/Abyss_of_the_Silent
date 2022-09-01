@@ -29,9 +29,7 @@ while running:
             running = False
 
     utils.bgIterImage(screen=screen, image=imbg)
-    #utils.bgFullImage(screen=screen, imagepath="isle.jpg")
     utils.bgPutImage(screen=screen, imagepath="start.png", size_x=50, size_y=30, pos_x=25, pos_y=60)
-    #screen.blit(imbt, (svx/3.5, svy/1.457))
 
     # Flip the display
     pygame.display.flip()
