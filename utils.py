@@ -15,20 +15,34 @@ def spriteLoad(path):
         raise SystemExit('Could not load image "%s" %s' % (path, pygame.get_error()))
     return surface.convert()
 
-def bgIterImage(screen, image, qual: int):
-    for x in range(svx // qual + 1):
-        for y in range(svx // qual + 1):
-            screen.blit(image, (x*qual, y*qual))
+def bgIterImage(screen, image):
+    for x in range(svx // image.get_width() + 1):
+        for y in range(svy // image.get_height() + 1):
+            screen.blit(image, (x*image.get_width(), y*image.get_height()))
 
 def bgFullImage(screen, imagepath):
     image = Image.open(f"{gpath}/assets/{imagepath}")
     image = image.resize((svx, svy)); image.save(f"assets/temp_{imagepath}")
     screen.blit(spriteLoad(f"{gpath}/assets/temp_{imagepath}"), (0, 0))
 
-def scaleToRes(imagepath):
-    ratio = svx / svy
+def bgPutImage(screen, imagepath, size_x, size_y, pos_x, pos_y): #size-pos should be cell%
+    fs_x, fs_y = returnCell(size_x, size_y)
+    fpos_x, fpos_y = returnCell(pos_x, pos_y)
+    fs_x = int(fs_x); fs_y = int(fs_y)
     image = Image.open(f"{gpath}/assets/{imagepath}")
-    image = image.resize((svx, svy)); image.save(f"assets/temp_{imagepath}")
+    image = image.resize((fs_x, fs_y)); image.save(f"assets/temp_{imagepath}")
+    screen.blit(spriteLoad(f"{gpath}/assets/temp_{imagepath}"), (fpos_x, fpos_y))
+
+def returnCell(pos_x, pos_y):
+    '''Works for both positions and length/height values'''
+    svxc = svx / 100; svyc = svy / 100 #finds out cell size
+    return pos_x * svxc, pos_y * svyc  #returns %posi into pixel posi
+
+#@DeprecationWarning
+def bgIterImageOld(screen, image, qual: int):
+    for x in range(svx // qual + 1):
+        for y in range(svx // qual + 1):
+            screen.blit(image, (x*qual, y*qual))
 
 #===================================================
 # SOUNDS

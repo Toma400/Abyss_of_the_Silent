@@ -17,7 +17,7 @@ from pygame.locals import (
 
 # Set up the drawing window
 screen = pygame.display.set_mode([svx, svy])
-imbg = utils.spriteLoad("menu.png")
+imbg = utils.spriteLoad("test.jpg")
 imbt = utils.spriteLoad("start.png")
 
 running = True
@@ -28,8 +28,9 @@ while running:
         if event.type == pygame.QUIT or event.type == KEYDOWN and event.key == K_ESCAPE:
             running = False
 
-    #utils.bgIterImage(screen=screen, image=imbg, qual=160)
-    utils.bgFullImage(screen=screen, imagepath="isle.jpg")
+    utils.bgIterImage(screen=screen, image=imbg)
+    #utils.bgFullImage(screen=screen, imagepath="isle.jpg")
+    utils.bgPutImage(screen=screen, imagepath="start.png", size_x=50, size_y=30, pos_x=25, pos_y=60)
     #screen.blit(imbt, (svx/3.5, svy/1.457))
 
     # Flip the display
